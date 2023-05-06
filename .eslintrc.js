@@ -14,7 +14,7 @@ const config = {
   },
   settings: {
     next: {
-      rootDir: ["apps/nextjs"],
+      rootDir: ["apps/admin"],
     },
   },
 };
