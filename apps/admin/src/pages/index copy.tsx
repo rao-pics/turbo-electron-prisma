@@ -2,16 +2,41 @@ import { useState } from "react";
 import type { NextPage } from "next";
 import Head from "next/head";
 
-import { api } from "~/utils/api";
+import { api, type RouterOutputs } from "~/utils/api";
+
+const PostCard: React.FC<{
+  post: RouterOutputs["post"]["all"][number];
+  onPostDelete?: () => void;
+}> = ({ post, onPostDelete }) => {
+  return (
+    <div className="flex flex-row rounded-lg bg-white/10 p-4 transition-all hover:scale-[101%]">
+      <div className="flex-grow">
+        <h2 className="text-2xl font-bold text-pink-400">{post.title}</h2>
+        <p className="mt-2 text-sm">{post.content}</p>
+      </div>
+      <div>
+        <span
+          className="cursor-pointer text-sm font-bold uppercase text-pink-400"
+          onClick={onPostDelete}
+        >
+          Delete
+        </span>
+      </div>
+    </div>
+  );
+};
 
 const CreatePostForm: React.FC = () => {
   const utils = api.useContext();
 
-  const [dir, setDir] = useState("");
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
 
-  const { mutate } = api.library.create.useMutation({
+  const { mutate, error } = api.post.create.useMutation({
     async onSuccess() {
-      await utils.library.all.invalidate();
+      setTitle("");
+      setContent("");
+      await utils.post.all.invalidate();
     },
   });
 
@@ -19,18 +44,32 @@ const CreatePostForm: React.FC = () => {
     <div className="flex w-full max-w-2xl flex-col p-4">
       <input
         className="mb-2 rounded bg-white/10 p-2 text-white"
-        value={dir}
-        onChange={(e) => setDir(e.target.value)}
-        placeholder="文件夹路径"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+        placeholder="Title"
       />
-
+      {error?.data?.zodError?.fieldErrors.title && (
+        <span className="mb-2 text-red-500">
+          {error.data.zodError.fieldErrors.title}
+        </span>
+      )}
+      <input
+        className="mb-2 rounded bg-white/10 p-2 text-white"
+        value={content}
+        onChange={(e) => setContent(e.target.value)}
+        placeholder="Content"
+      />
+      {error?.data?.zodError?.fieldErrors.content && (
+        <span className="mb-2 text-red-500">
+          {error.data.zodError.fieldErrors.content}
+        </span>
+      )}
       <button
         className="rounded bg-pink-400 p-2 font-bold"
         onClick={() => {
           mutate({
-            location: dir,
-            name: "test.library",
-            type: "eagle",
+            title,
+            content,
           });
         }}
       >
@@ -41,7 +80,11 @@ const CreatePostForm: React.FC = () => {
 };
 
 const Home: NextPage = () => {
-  const postQuery = api.library.all.useQuery();
+  const postQuery = api.post.all.useQuery();
+
+  const deletePostMutation = api.post.delete.useMutation({
+    onSettled: () => postQuery.refetch(),
+  });
 
   return (
     <>
@@ -67,14 +110,11 @@ const Home: NextPage = () => {
                   <div className="flex w-full flex-col gap-4">
                     {postQuery.data?.map((p) => {
                       return (
-                        <div
+                        <PostCard
                           key={p.id}
-                          className="dark:highlight-white/5 w-80 rounded-md bg-blue-500 p-2 text-sm caret-pink-500 shadow-sm ring-1 ring-slate-900/10 focus:outline-none focus:ring-2 focus:ring-pink-500 dark:bg-slate-800 dark:ring-0 dark:focus:bg-slate-900 dark:focus:ring-2 dark:focus:ring-pink-500"
-                        >
-                          <p>localtion: {p.location}</p>
-                          <p>name: {p.name}</p>
-                          <p>type: {p.type}</p>
-                        </div>
+                          post={p}
+                          onPostDelete={() => deletePostMutation.mutate(p.id)}
+                        />
                       );
                     })}
                   </div>
