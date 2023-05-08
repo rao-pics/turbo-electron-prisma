@@ -1,6 +1,5 @@
 packages:
   - apps/electron
-  - apps/admin
   - packages/api
   - packages/db
   - packages/config/*
