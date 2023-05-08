@@ -6,18 +6,18 @@
   "main": "main/dist/index.cjs",
   "type": "module",
   "scripts": {
-    "bootstrap": "npm install",
+    "lint": "eslint .",
+    "lint:fix": "pnpm lint --fix",
     "dev": "cross-env NODE_ENV=development npm run watch:desktop",
     "build": "npm run build:main & npm run build:preload & npm run build:renderer",
     "compile": "cross-env MODE=production npm run build && cross-env NODE_ENV=production ts-node scripts/compile.ts",
-    "format": "prettier -w .",
-    "lint": "eslint .",
     "watch:web": "ts-node scripts/watchWeb.ts",
     "watch:desktop": "ts-node scripts/watchDesktop.ts",
     "build:main": "cd ./main && tsc && vite build",
     "build:preload": "cd ./preload && tsc && vite build",
     "build:renderer": "cd ./renderer && tsc && vite build",
-    "vendors:update": "cross-env ELECTRON_RUN_AS_NODE=1 electron scripts/update-electron-vendors.mjs"
+    "vendors:update": "cross-env ELECTRON_RUN_AS_NODE=1 electron scripts/update-electron-vendors.mjs",
+    "postinstall": "pnpm vendors:update"
   },
   "keywords": [],
   "author": "",

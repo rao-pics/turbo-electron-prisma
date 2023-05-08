@@ -1,8 +1,8 @@
-import { node } from "../.electron-vendors.cache.json";
-import { join } from "path";
-
-import { defineConfig } from "vite";
 import { builtinModules } from "module";
+import { join } from "path";
+import { defineConfig } from "vite";
+
+import { node } from "../.electron-vendors.cache.json";
 
 const PACKAGE_ROOT = __dirname;
 
@@ -18,7 +18,7 @@ if (typeof node !== "string") {
 // https://vitejs.dev/guide/env-and-mode.html
 
 export default defineConfig({
-  mode: process.env.MODE,
+  mode: process.env["MODE"],
   root: PACKAGE_ROOT,
   envDir: process.cwd(),
   resolve: {
@@ -34,7 +34,7 @@ export default defineConfig({
     emptyOutDir: true,
     assetsDir: ".",
     // set to development in the watch script
-    minify: process.env.MODE !== "development",
+    minify: process.env["MODE"] !== "development",
     lib: {
       entry: "./index.ts",
       formats: ["cjs"],
