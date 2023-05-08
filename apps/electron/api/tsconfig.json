@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "module": "esnext",
+    "target": "esnext",
+    "sourceMap": false,
+    "moduleResolution": "Node",
+    "skipLibCheck": true,
+    "strict": true,
+    "strictNullChecks": true,
+    "isolatedModules": true,
+    "types": ["node"],
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": ".",
+    "noEmit": true
+  },
+  "include": ["./**/*.ts", "./**/*.d.ts", "./../types/main-env.d.ts"]
+}
