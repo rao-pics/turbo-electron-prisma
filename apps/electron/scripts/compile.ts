@@ -20,6 +20,7 @@ const config: builder.Configuration = {
     "buildResources/db.sqlite",
     "node_modules/.prisma/**/*",
     "node_modules/@prisma/client/**/*",
+    "node_modules/@acme/db",
   ],
 };
 
