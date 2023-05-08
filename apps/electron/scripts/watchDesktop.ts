@@ -1,8 +1,7 @@
+import { spawn, type ChildProcess } from "child_process";
 import electronPath from "electron";
-import { build } from "vite";
-import type { ViteDevServer } from "vite";
-import { spawn } from "child_process";
-import type { ChildProcess } from "child_process";
+import { build, type ViteDevServer } from "vite";
+
 import { listeningWebServer } from "./watchWeb.js";
 
 // process.env.MODE is used in various vite config files
@@ -84,7 +83,7 @@ function createMainWatcher() {
   return watcher;
 }
 // set up VITE_DEV_SERVER_URL, the URL that's loaded into the electron browser during dev
-process.env.VITE_DEV_SERVER_URL = listeningWebServer.resolvedUrls?.local[0];
+process.env["VITE_DEV_SERVER_URL"] = listeningWebServer.resolvedUrls?.local[0];
 // start preload watcher
 await createPreloadWatcher(listeningWebServer);
 // start main watcher

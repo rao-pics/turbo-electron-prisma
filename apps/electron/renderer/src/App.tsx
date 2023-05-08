@@ -3,14 +3,14 @@ import "./App.css";
 import { trpc } from "./utils/trpc";
 import Home from "./Home";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { TRPCClientError, TRPCClientRuntime } from "@trpc/client";
+import { TRPCClientError, type TRPCClientRuntime } from "@trpc/client";
 import type { TRPCLink } from "@trpc/client";
 import { observable } from "@trpc/server/observable";
-import { AnyRouter, inferRouterError } from "@trpc/server";
+import { type AnyRouter, type inferRouterError } from "@trpc/server";
 import {
-  TRPCResponse,
-  TRPCResponseMessage,
-  TRPCResultMessage,
+  type TRPCResponse,
+  type TRPCResponseMessage,
+  type TRPCResultMessage,
 } from "@trpc/server/rpc";
 
 // from @trpc/client/src/links/internals/transformResult

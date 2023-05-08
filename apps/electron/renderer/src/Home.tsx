@@ -1,6 +1,6 @@
 import "./App.css";
-import { trpc } from "./utils/trpc";
 import reactLogo from "./assets/react.svg";
+import { trpc } from "./utils/trpc";
 
 function Home() {
   const examples = trpc.example.getAll.useQuery();
@@ -21,10 +21,10 @@ function Home() {
     <div className="App">
       <div>
         <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
-          <img src="vite.svg" className="logo" alt="Vite logo" />
+          {/* <img src="vite.svg" className="logo" alt="Vite logo" /> */}
         </a>
         <a href="https://reactjs.org" target="_blank" rel="noreferrer">
-          <img src={reactLogo} className="logo react" alt="React logo" />
+          {/* <img src={reactLogo} className="logo react" alt="React logo" /> */}
         </a>
       </div>
       <p>{greeting.data}</p>

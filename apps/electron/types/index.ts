@@ -1,5 +1,5 @@
-import { Operation } from "@trpc/client";
-import { TRPCResponse } from "@trpc/server/rpc";
+import { type Operation } from "@trpc/client";
+import { type TRPCResponse } from "@trpc/server/rpc";
 
 export interface IPCResponse {
   response: TRPCResponse;

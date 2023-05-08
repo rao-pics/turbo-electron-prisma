@@ -44,6 +44,7 @@
     "VERCEL",
     "VERCEL_URL",
     "PUBLIC",
-    "DIST"
+    "DIST",
+    "MODE"
   ]
 }
