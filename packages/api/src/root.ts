@@ -1,10 +1,15 @@
-import { libraryRouter } from "./router/library";
-import { postRouter } from "./router/post";
-import { createTRPCRouter } from "./trpc";
+import { z } from "zod";
 
-export const appRouter = createTRPCRouter({
-  post: postRouter,
-  library: libraryRouter,
+import { exampleRouter } from "./router/example";
+import { t } from "./trpc";
+
+export const appRouter = t.router({
+  example: exampleRouter,
+  greeting: t.procedure
+    .input(z.object({ name: z.string() }).nullish())
+    .query(({ input }) => {
+      return `hello tRPC v10, ${input?.name ?? "world"}!`;
+    }),
 });
 
 // export type definition of API
