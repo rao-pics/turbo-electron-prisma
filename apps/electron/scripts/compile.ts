@@ -31,8 +31,6 @@ const config: builder.Configuration = {
       to: "node_modules/@prisma/client",
       filter: ["**/*", "!node_modules"],
     },
-    // "node_modules/.prisma/**/*",
-    // "node_modules/@prisma/client/**/*",
   ],
 };
 
