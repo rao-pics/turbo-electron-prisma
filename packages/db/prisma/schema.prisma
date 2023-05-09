@@ -7,9 +7,9 @@ generator client {
 
 datasource db {
     provider = "sqlite"
-    url      = "file:../../../apps/electron/buildResources/db.sqlite"
+    url      = "file:./db.sqlite"
 }
 
 model Example {
-    id String @id @default(uuid())
+    id String @id
 }

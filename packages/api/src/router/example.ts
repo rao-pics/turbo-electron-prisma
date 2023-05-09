@@ -12,7 +12,7 @@ export const exampleRouter = t.router({
     });
   }),
   remove: t.procedure
-    .input(z.object({ id: z.string().uuid() }))
+    .input(z.object({ id: z.string() }))
     .mutation(({ ctx, input }) => {
       return ctx.prisma.example.delete({
         where: { id: input.id },

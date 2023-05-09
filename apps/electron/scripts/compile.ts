@@ -17,10 +17,21 @@ const config: builder.Configuration = {
     version: process.env["VITE_APP_VERSION"],
   },
   extraResources: [
-    "buildResources/db.sqlite",
-    "node_modules/.prisma/**/*",
-    "node_modules/@prisma/client/**/*",
-    "node_modules/@acme/db",
+    // "buildResources/db.sqlite",
+    {
+      from: "../../packages/db/prisma",
+      to: "node_modules/@acme/db/prisma",
+    },
+    {
+      from: "../../node_modules/.prisma",
+      to: "node_modules/.prisma",
+    },
+    {
+      from: "../../node_modules/@prisma",
+      to: "node_modules/@prisma",
+    },
+    // "node_modules/.prisma/**/*",
+    // "node_modules/@prisma/client/**/*",
   ],
 };
 
