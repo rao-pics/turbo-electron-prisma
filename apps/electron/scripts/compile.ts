@@ -19,16 +19,17 @@ const config: builder.Configuration = {
   extraResources: [
     // "buildResources/db.sqlite",
     {
-      from: "../../packages/db/prisma",
-      to: "node_modules/@acme/db/prisma",
+      from: "../../packages/db/prisma/db.sqlite",
+      to: "packages/db/prisma/db.sqlite",
     },
     {
       from: "../../node_modules/.prisma",
       to: "node_modules/.prisma",
     },
     {
-      from: "../../node_modules/@prisma",
-      to: "node_modules/@prisma",
+      from: "../../node_modules/@prisma/client",
+      to: "node_modules/@prisma/client",
+      filter: ["**/*", "!node_modules"],
     },
     // "node_modules/.prisma/**/*",
     // "node_modules/@prisma/client/**/*",
