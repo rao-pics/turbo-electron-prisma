@@ -1,3 +1,5 @@
+![](./preview.png)
+
 # turbo-electron-prisma
 
 - turbo
@@ -5,7 +7,7 @@
 - prisma
 - ct3a
 
-兼容 prisma studio 和 electron 同时使用。
+兼容 prisma studio 和 electron 同时使用，太酷啦 😎
 
 ## Installation
 
@@ -31,3 +33,8 @@ packages
  └─ config
      └─ common config
 ```
+
+## Thanks
+
+- [electron-trpc-prisma](https://github.com/NickyMeuleman/electron-trpc-prisma)
+- [create-t3-turbo](https://github.com/t3-oss/create-t3-turbo)

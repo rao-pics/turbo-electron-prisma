@@ -6,6 +6,7 @@
   "main": "main/dist/index.cjs",
   "type": "module",
   "scripts": {
+    "clean": "rm -rf node_modules dist",
     "lint": "eslint .",
     "lint:fix": "pnpm lint --fix",
     "dev": "cross-env NODE_ENV=development npm run watch:desktop",
